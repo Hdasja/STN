@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel='stylesheet' href='/static/css/fontawesome.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap"rel="stylesheet'>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/layui.css" tppabs="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <title>Result</title>
+    <script src="/static/xlsx.full.min.js"></script>
+    <script src="/static/layui.js" charset="utf-8"></script>
+      <script type="text/javascript" src="/static/xlsx.js"></script>
+
+</head>
+<body>
+
+    <div class="layui-bg-gray" style="padding: 30px;height: 100%; width: 100%">
+        <div class="layui-panel">
+            <div class="container" style="display: flex; justify-content: space-between;align-content: center">
+                <div class="layui-font-26" style="padding: 40px 25px;margin-inside: 20px;"><b>结果展示</b></div>
+                <div class = "layui-btn-container" style="float: right;margin: 40px 100px;">
+                    <div class="layui-inline">
+                        <form action="/backpage">
+                            <button id="plotButton" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-normal"  style="margin-inside: 20px; font-size: 22px; width: 130px"><b>上一页</b></button>
+                        </form>
+                    </div>
+                    <div class="layui-inline">
+                        <form action="/firstpage">
+                            <button id="plotButton" class="layui-btn layui-btn-lg layui-btn-radius layui-btn"  style="margin-inside: 20px; font-size: 22px; width: 150px"><b>返回首页</b></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-btn-container" style="height: 80%;width: 100%">
+        <div class="app">
+        <div class="cardList">
+            <!-- 左按钮 -->
+            <button class="cardList__btn btn btn--left">
+                <div class="icon">
+                    <svg>
+                        <use xlink:href="#arrow-left"></use>
+                    </svg>
+                </div>
+            </button>
+
+            <!-- 图片展示 -->
+            <div class="cards__wrapper">
+                <div class="card current--card">
+                    <div class="card__image">
+                        <img src="/static/images/YRG.jpg" alt="" />
+                    </div>
+                </div>
+
+                <div class="card next--card">
+                    <div class="card__image">
+                        <img src="/static/images/YCKG.jpg" alt="" />
+                    </div>
+                </div>
+
+                <div class="card previous--card">
+                    <div class="card__image">
+                        <img src="/static/images/YCTG.jpg" alt="" />
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 右按钮 -->
+            <button class="cardList__btn btn btn--right">
+                <div class="icon">
+                    <svg>
+                        <use xlink:href="#arrow-right"></use>
+                    </svg>
+                </div>
+            </button>
+        </div>
+
+        <!-- 对应的信息 -->
+        <div class="infoList">
+            <div class="info__wrapper">
+                <div class="info current--info">
+                    <p class="text description">生料曲线</p>
+                </div>
+
+                <div class="info next--info">
+                    <p class="text description">熟料曲线</p>
+                </div>
+
+                <div class="info previous--info">
+                    <p class="text description">水泥曲线</p>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- 对应的背景 -->
+        <div class="app__bg">
+            <div class="app__bg__image current--image">
+                <img src="/static/images/background.jpg" alt="" />
+            </div>
+            <div class="app__bg__image next--image">
+                <img src="/static/images/background.jpg" alt="" />
+            </div>
+            <div class="app__bg__image previous--image">
+                <img src="/static/images/background.jpg" alt="" />
+            </div>
+        </div>
+        </div>
+
+    <!-- 加载页面 -->
+    <div class="loading__wrapper">
+        <div class="loader--text">Loading...</div>
+        <div class="loader">
+            <span></span>
+        </div>
+    </div>
+
+    <!-- 绘制按钮 -->
+    <svg class="icons" style="display: none;">
+        <symbol id="arrow-left" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+            <polyline points='328 112 184 256 328 400' style='fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px' />
+        </symbol>
+        <symbol id="arrow-right" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+            <polyline points='184 112 328 256 184 400' style='fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px' />
+        </symbol>
+    </svg>
+    </div>
+    </div>
+
+
+<script src='/static/imageload.js'></script>
+<script src='/static/GSAP.js'></script>
+<script src="/static/script.js"></script>
+
+
+</body>
+</html>

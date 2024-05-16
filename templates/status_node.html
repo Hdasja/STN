@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/layui.css">
+    <title>Page2</title>
+    <style>
+        /* 样式可以根据需要自定义 */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 30px 50px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* 用于示例页面的样式 */
+        .page-content {
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+
+        *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 10px;
+}
+
+.nav_link{
+    height: 100px;
+    list-style: none;
+}
+
+.nav_link {
+    display: flex; /* 使用 flex 布局 */
+    justify-content: flex-start; /* 水平等间距对齐 */
+    align-items: center; /* 垂直居中对齐 */
+}
+
+.nav_link li a{
+    transition: all 0.3s ease 0s;
+}
+
+.layui-input-block {
+    width: auto; /* 修改为自适应宽度 */
+}
+
+
+    .nav_link li button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        padding: 30px 30px;
+        font: inherit;
+        font-size: 25px;
+        color: #ddd; /* 使按钮颜色与文本颜色一致 */
+    }
+
+
+    .nav_link li button:hover {
+        color: black; /* 悬停时改变按钮颜色 */
+    }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul class="nav_link">
+        <li>
+            <a href="/ToPrice">
+                <button type="submit" style="border:none; background-color:transparent;">价格输入</button>
+            </a>>
+        </li>
+        <li>
+            <a href="/ToStatus">
+                <button type="submit" style="border:none; background-color:transparent;">状态节点</button>
+            </a>
+        </li>
+        <li>
+            <a href="/ToTask">
+                <button type="submit" style="border:none; background-color:transparent;">任务节点</button>
+            </a>>
+        </li>
+    </ul>
+</nav>
+
+
+<div class="layui-bg-gray" style="padding: 30px;">
+      <div class="layui-panel">
+          <div class="layui-font-24">
+              <div style="padding: 40px 25px;margin-inside: 20px;">步骤二：状态节点输入</div>
+          </div>
+      </div>
+
+      <div class="layui-panel" style="width: 90%;height: 70%;margin: 20px auto;padding: 30px;overflow: auto">
+          <div id="container"></div>
+
+          <div style="width: 80%;height: 400px;margin: 30px auto;overflow: auto">
+
+          <table class="layui-table" lay-size="lg" style="border-collapse: collapse; border: 1.5px solid #2e2d3c;">
+              <colgroup>
+                  <col width="150">
+                  <col width="200">
+                  <col width="100">
+                  <col width="150">
+                  <col width="150">
+                  <col>
+              </colgroup>
+                  <thead>
+                      <tr style="border: 1.5px solid #2e2d3c;">
+                      <th lay-data="{field:'StatusCode'}" style="text-align: center">状态编号</th>
+                      <th lay-data="{field:'StatusName'}" style="text-align: center">状态名称</th>
+                      <th lay-data="{field:'InitialValue'}" style="text-align: center">初值</th>
+                      <th lay-data="{field:'StorageMin'}" style="text-align: center">储存下限</th>
+                      <th lay-data="{field:'StorageMax'}" style="text-align: center">储存上限</th>
+                      <th lay-data="{field:'option'}">操作</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  {% for status in iptStatusData %}
+                  <tr>
+                      <td style="text-align: center">{{ status.StatusCode }}</td>
+                      <td style="text-align: center">{{ status.StatusName }}</td>
+                      <td style="text-align: center">{{ status.InitialValue }}</td>
+                      <td style="text-align: center">{{ status.StorageMin }}</td>
+                      <td style="text-align: center">{{ status.StorageMax }}</td>
+                      <td>
+                          <a href="/change/{{ status.StatusCode }}" class="layui-btn">修改</a>
+                          <a href="/delete/{{ status.StatusCode }}" class="layui-btn layui-btn-danger">删除</a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+                  </tbody>
+          </table>
+          </div>
+
+      </div>
+
+
+      <form class="layui-form" action="/StatusNode" method="POST">
+      <div class="layui-panel" style="width: 90%;height: 70px;margin: 20px auto">
+          <button class="layui-btn layui-btn-lg" style="position: relative; top: 20%; left: 80%; margin: auto"> <b>新建节点</b></button>
+      </div>
+      </form>
+
+      <div style="width: 200px;height: 50px;margin: 30px auto;">
+          <div class="layui-btn-container">
+              <div class="layui-inline">
+                  {% if status_len[0] < 4 %}
+                      <div id="layerDemo" style="margin-bottom: 0;">
+                          <button id="plotButton" type="button" data-method="offset" data-type="auto" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius"><b>下一页</b></button>
+                      </div>
+                  {% else %}
+                      <a href="/ToTask">
+                          <button type="submit" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius"><b>下一页</b></button>
+                      </a>
+                  {% endif %}
+              </div>
+          </div>
+      </div>
+
+</div>
+
+<script src="/static/layui.js" charset="utf-8"></script>
+<script>
+
+    layui.use('layer', function(){ //独立版的layer无需执行这一句
+  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+
+  //触发事件
+  var active = {
+    setTop: function(){
+      var that = this;
+      //多窗口模式，层叠置顶
+      layer.open({
+        type: 1 //此处以iframe举例
+        ,area: ['390px', '260px']
+        ,shade: 0
+        ,yes: function(){
+          $(that).click();
+        }
+
+        ,zIndex: layer.zIndex //
+        ,success: function(layero, index){
+          layer.setTop(layero); //
+          layer.escIndex = layer.escIndex || [];
+          layer.escIndex.unshift(index);
+          layero.on('mousedown', function(){
+            var _index = layer.escIndex.indexOf(index);
+            if(_index !== -1){
+              layer.escIndex.splice(_index, 1);
+            }
+            layer.escIndex.unshift(index);
+          });
+        }
+        ,end: function(){
+          if(typeof layer.escIndex === 'object'){
+            layer.escIndex.splice(0, 1);
+          }
+        }
+      });
+    }
+    ,offset: function(othis){
+      var type = othis.data('type')
+
+      layer.open({
+        type: 1
+        ,offset: type
+        ,id: 'layerDemo'+type
+        ,content: '<div style="padding: 20px 100px;"><b>状态数目不足</b></div>'
+        ,btn: '确定'
+        ,btnAlign: 'c'
+        ,shade: 0
+        ,yes: function() {
+              layer.closeAll();
+          }
+      });
+    }
+  };
+  $('#layerDemo .layui-btn').on('click', function(){
+    var othis = $(this), method = othis.data('method');
+    active[method] ? active[method].call(this, othis) : '';
+  });
+  $(document).on('keyup', function(e){
+    if(e.keyCode === 27){
+      layer.close(layer.escIndex ? layer.escIndex[0] : 0);
+    }
+  });
+});
+
+
+
+function redirectToInputPage() {
+  window.location.href = 'add.html';
+}
+
+function createBox(status_code, status_name, initial_value, storage_min, storage_max) {
+  var newBox = document.createElement('div');
+  newBox.classList.add('box');
+  newBox.innerHTML = '状态编号' + status_code + 'px<br>状态名称：' + status_name + 'px<br>初值：' + initial_value + 'px<br>储存下限：' + storage_min + 'px<br>储存上限：' + storage_max + 'px'; // 设置 box 内容
+
+  // 添加修改按钮
+  var modifyButton = document.createElement('button');
+  modifyButton.innerText = '修改';
+  modifyButton.onclick = function() {
+    var new_status_code = prompt('请输入新状态编号（单位：px）', status_code);
+    var new_status_name = prompt('请输入新的状态名称（单位：px）', status_name);
+    var new_initial_value = prompt('请输入新的初值（单位：px）', initial_value);
+    var new_storage_min = prompt('请输入新的储存下限（单位：px）', storage_min);
+    var new_storage_max = prompt('请输入新的储存上限（单位：px）', storage_max);
+
+    newBox.innerHTML = '状态编号' + new_status_code + 'px<br>状态名称：' + new_status_name + 'px<br>初值：' + new_initial_value + 'px<br>储存下限：' + new_storage_min + 'px<br>储存上限：' + new_storage_max + 'px';
+  };
+  newBox.appendChild(modifyButton);
+
+  // 将新建的 box 添加到容器中的末尾
+  var container = document.getElementById('container');
+  container.appendChild(newBox);
+}
+
+
+
+// 在页面加载完成后检查 URL 中是否有传递的参数，如果有，则创建对应的 box
+window.onload = function() {
+  var urlParams = new URLSearchParams(window.location.search);
+  if(urlParams.has('status_code') && urlParams.has('status_name') && urlParams.has('initial_value') && urlParams.has('storage_min') && urlParams.has('storage_max')) {
+    var status_code = urlParams.get('status_code');
+    var status_name = urlParams.get('status_name');
+    var initial_value = urlParams.get('initial_value');
+    var storage_min = urlParams.get('storage_min');
+    var storage_max = urlParams.get('storage_max');
+    createBox(status_code, status_name, initial_value, storage_min, storage_max);
+  }
+};
+
+
+
+</script>
+</body>
+</html>

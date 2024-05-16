@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/layui.css">
+    <title>Add item</title>
+</head>
+<body>
+
+<div class="layui-panel" style="justify-content: space-between">
+    <div class="layui-inline">
+    <div class="layui-font-24">
+        <div style="padding: 40px 25px;margin-inside: 20px;">数据不可解</div>
+    </div>
+    </div>
+    <div class="layui-inline">
+    <div class="layui-panel" style="float: right; width: 40%; height: 20px; float: right;margin: 30px;padding: 27px">
+        <div class="container">
+            <a href="/static/file/model_infeasible.lp" download="model_infeasible" ><i class="layui-icon layui-icon-download-circle" ></i><b>download</b></a>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div style="width: 500px;height: 800px;margin: 200px auto;">
+    <div class="layui-panel">
+        <pre id="lp-content" style="padding: 40px 40px"></pre>
+    </div>
+
+    <div style="width: 110px;height: 180px;margin: 40px auto;justify-content: center;align-content: center">
+        <div class="layui-btn-container">
+            <a href="status_node.html">
+            <form class="layui-form" action="/ToPrice" method="GET">
+                <button type="submit" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius"><b>返回</b></button>
+            </form>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    fetch("/static/file/model_infeasible.lp")
+        .then(response => response.text())
+        .then(lpContent => {
+            const lpElement = document.getElementById("lp-content");
+            lpElement.textContent = lpContent;
+        });
+</script>
+
+
+</body>
+</html>

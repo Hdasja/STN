@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/layui.css">
+    <title>Page1</title>
+    <style>
+        /* 样式可以根据需要自定义 */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 30px 50px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* 用于示例页面的样式 */
+        .page-content {
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+
+        *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 10px;
+}
+
+.nav_link{
+    height: 100px;
+    list-style: none;
+}
+
+.nav_link {
+    display: flex; /* 使用 flex 布局 */
+    justify-content: flex-start; /* 水平等间距对齐 */
+    align-items: center; /* 垂直居中对齐 */
+}
+
+.nav_link li a{
+    transition: all 0.3s ease 0s;
+}
+
+.layui-input-block {
+    width: auto; /* 修改为自适应宽度 */
+}
+
+
+    .nav_link li button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        padding: 30px 30px;
+        font: inherit;
+        font-size: 25px;
+        color: #ddd; /* 使按钮颜色与文本颜色一致 */
+    }
+
+
+    .nav_link li button:hover {
+        color: black; /* 悬停时改变按钮颜色 */
+    }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul class="nav_link">
+        <li>
+            <a href="/ToPrice">
+                <button type="submit" style="border:none; background-color:transparent;">价格输入</button>
+            </a>>
+        </li>
+        <li>
+            <a href="/ToStatus">
+                <button type="submit" style="border:none; background-color:transparent;">状态节点</button>
+            </a>
+        </li>
+        <li>
+            <a href="/ToTask">
+                <button type="submit" style="border:none; background-color:transparent;">任务节点</button>
+            </a>>
+        </li>
+    </ul>
+</nav>
+
+<div class="layui-bg-gray" style="padding: 30px;">
+      <div class="layui-panel">
+          <div class="layui-font-24">
+              <div style="padding: 40px 25px;margin-inside: 20px;">步骤一：电价价格输入</div>
+          </div>
+      </div>
+
+<div style="width: 80%;height: 60%;margin: 30px auto;">
+    <div class="layui-panel">
+
+    <br>
+
+    <form class="layui-form" action="/pricesubmit" style="margin-top: 30px; margin-bottom: 30px" method="POST">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="white-space: nowrap; display: inline-block; width: 80px"><b>分时电价</b></label>
+            <div class="layui-input-block" style="width: 85%;">
+                <input type="text" id="TOU_values" name="TOU_Values" required  lay-verify="required" placeholder="form：1,2,3 or [1,2,3]  (ENG comma)" autocomplete="off" class="layui-input" style="width: 100%;">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="white-space: nowrap; display: inline-block;"><b>电网售价</b></label>
+            <div class="layui-input-block" style="width: 85%;">
+                <input type="text" id="price_values" name="price_Values" required  lay-verify="required" placeholder="form：1,2,3 or [1,2,3]  (ENG comma)" autocomplete="off" class="layui-input" style="width: 100%;">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="white-space: nowrap; display: inline-block;"><b>光伏预测出力</b></label>
+            <div class="layui-input-block" style="width: 85%;">
+                <input type="text" id="PV_values" name="PV_Values" required  lay-verify="PV_values" placeholder="form：1,2,3 or [1,2,3]  (ENG comma)" autocomplete="off" class="layui-input" style="width: 100%;">
+            </div>
+        </div>
+
+        <br>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit lay-filter="formDemo"><b>提交</b></button>
+                <button type="reset" class="layui-btn layui-btn-primary"><b>重置</b></button>
+            </div>
+        </div>
+    </form>
+    </div>
+
+    <div style="width: 170px;height: 80px;margin: 40px auto;justify-content: center;align-content: center">
+        <div class="layui-btn-container">
+            <a href="status_node.html">
+            <form class="layui-form" action="/ToStatus_1st" method="GET">
+                <button type="submit" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius"><b>下一页</b></button>
+            </form>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="/static/layui.js" charset="utf-8"></script>
+<script>
+    layui.use('form',function(){
+        var table = layui.table
+        table.init('demo',{
+            height:335
+            , limit:10
+        })
+    })
+</script>
+
+</body>
+</html>

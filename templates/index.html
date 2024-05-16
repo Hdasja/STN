@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/css/layui.css" tppabs="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <title>Result</title>
+    <script src="/static/xlsx.full.min.js"></script>
+    <script src="/static/layui.js" charset="utf-8"></script>
+
+</head>
+<body>
+    <div class="layui-bg-gray" style="padding: 30px">
+        <div class="layui-panel">
+            <div class="container" style="display: flex; justify-content: space-between;align-content: center">
+                <div class="layui-font-26" style="padding: 40px 25px;margin-inside: 20px;"><b>结果展示</b></div>
+                <form action="/backpage">
+                <div class = "layui-btn-container" style="float: right;margin: 40px 100px;">
+                    <button id="plotButton" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-normal"  style="margin-inside: 20px; font-size: 22px; width: 130px"><b>下一页</b></button>
+                </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div style="width: 80%; height: 600px;margin: 30px auto;padding: 5px">
+            <div class="layui-panel" style="width: 100%; height: 600px">
+                <div class="layui-btn-container" style="height: 80%;width: 100%;padding: 5px">
+                    <div id="excelContainer" style="display: flex; justify-content: center; transform: scale(1.25); align-items: center; padding: 100px 20px"></div>
+                </div>
+
+            <style>
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .container a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+            }
+
+            .container a i {
+                margin-right: 5px;
+            }
+            </style>
+
+            <div class="layui-panel" style="width: 10%; height: 25px; float: right;margin: 30px auto;padding: 27px">
+                <div class="container">
+                    <a href="/static/file/optimization_results_Cemment_low.xlsx" download="optimization_results_Cemment_low" ><i class="layui-icon layui-icon-download-circle" ></i><b>download</b></a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+<script src="/static/xlsx.full.min.js"></script>
+<script>
+
+    // 获取 Excel 文件的路径
+    var excelFilePath = '/static/file/optimization_results_Cemment_low.xlsx';
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', excelFilePath, true);
+    xhr.responseType = 'arraybuffer';
+
+    xhr.onload = function() {
+        var arraybuffer = xhr.response;
+
+        var data = new Uint8Array(arraybuffer);
+        var workbook = XLSX.read(data, { type: 'array' });
+
+        var sheetName = workbook.SheetNames[0];
+        var worksheet = workbook.Sheets[sheetName];
+
+        var html = XLSX.utils.sheet_to_html(worksheet);
+
+        document.getElementById('excelContainer').innerHTML = html;
+    };
+
+    xhr.send();
+</script>
+
+</body>
+</html>

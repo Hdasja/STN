@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/layui.css">
+    <title>Add item</title>
+</head>
+<body>
+
+<div class="layui-panel">
+    <div class="layui-font-24">
+        <div style="padding: 40px 25px;margin-inside: 20px;">节点添加</div>
+    </div>
+</div>
+
+<div style="width: 500px;height: 800px;margin: 200px auto;">
+    <div class="layui-panel" >
+        <form class="layui-form" action="/AddStatus" method="POST">
+
+            <div class="layui-form-item" style="margin-top: 30px; margin-bottom: 30px">
+            <label class="layui-form-label" style="white-space: nowrap; display: inline-block;"><b>状态编号</b></label>
+                <div class="layui-input-block" style="width: 80%;">
+                    <input type="text"
+                           id="ipt_status_code"
+                           name="StatusCode" required  lay-verify="required" autocomplete="off" class="layui-input" style="width: 85%;">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+            <label class="layui-form-label" style="white-space: nowrap; display: inline-block;"><b>状态名称</b></label>
+                <div class="layui-input-block" style="width: 80%;">
+                    <input type="text"
+                           id="ipt_status_name" required
+                           name="StatusName"
+                           lay-verify="required"
+                           autocomplete="off"
+                           class="layui-input"
+                           style="width: 85%;">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+            <label class="layui-form-label" style="white-space: nowrap; display: inline-block;"><b>初值</b></label>
+                <div class="layui-input-block" style="width: 80%;">
+                    <input type="text"
+                           id="ipt_initial_value"
+                           name="InitialValue" required  lay-verify="required" placeholder="吨" autocomplete="off" class="layui-input" style="width: 85%;">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label"><b>储存上下限</b></label>
+                <div class="layui-input-inline" style="width: 138px;">
+                    <input type="text"
+                           id="ipt_storage_min"
+                           name="StorageMin" autocomplete="off" class="layui-input">
+                </div>
+                <label class="layui-form-mid"><b>吨</b></label>
+                <div class="layui-form-mid">-</div>
+                <div class="layui-input-inline" style="width: 138px;">
+                    <input type="text"
+                           id="ipt_storage_max"
+                           name="StorageMax" autocomplete="off" class="layui-input">
+                </div>
+                <label class="layui-form-mid"><b>吨</b></label>
+            </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" onclick="returnValues()"><b>保存</b></button>
+                    <a href="status_node.html">
+                    <button type="reset" class="layui-btn layui-btn-primary"><b>重置</b></button>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+function returnValues() {
+  // 获取输入框中的值
+  var status_code = document.getElementById('ipt_status_code').value;
+  var status_name = document.getElementById('ipt_status_name').value;
+  var initial_value = document.getElementById('ipt_initial_value').value;
+  var storage_min = document.getElementById('ipt_storage_min').value;
+  var storage_max = document.getElementById('ipt_storage_max').value;
+
+  // 返回到首页，并传递数据
+  var urlParams = new URLSearchParams(window.location.search);
+  urlParams.set('status_code', status_code);
+  urlParams.set('status_name', status_name);
+  urlParams.set('initial_value', initial_value);
+  urlParams.set('storage_min', storage_min);
+  urlParams.set('storage_max', storage_max);
+  window.location.href = 'status_node.html?' + urlParams.toString();
+}
+
+
+</script>
+
+</body>
+</html>
+

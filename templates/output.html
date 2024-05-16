@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/css/layui.css" tppabs="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <title>Result</title>
+</head>
+<body>
+
+    <div class="layui-bg-gray" style="padding: 30px;height: 100%">
+        <div class="layui-panel">
+            <div class="container" style="display: flex; justify-content: space-between;align-content: center">
+                <div class="layui-font-26" style="padding: 40px 25px;margin-inside: 20px;"><b>结果展示</b></div>
+                <form action="/test">
+                <div class = "layui-btn-container" style="float: right;margin: 40px 100px;">
+                    <button id="plotButton" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-normal" onclick="showIcon()" style="margin-inside: 20px; font-size: 22px; width: 130px"><b>运行</b></button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<script src="/static/layui.js" charset="utf-8"></script>
+<script>
+
+    function showIcon() {
+        var button = document.getElementById('plotButton');
+            button.innerHTML = '<i class="layui-icon layui-icon-loading-1 layui-anim layui-anim-rotate layui-anim-loop" style="font-size: 35px"></i> 运行';
+        }
+
+layui.use('element', function(){
+  var $ = layui.jquery
+  ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+  //触发事件
+  var active = {
+    setPercent: function(){
+      //设置50%进度
+      element.progress('demo', '50%')
+    }
+    ,loading: function(othis){
+      var DISABLED = 'layui-btn-disabled';
+      if(othis.hasClass(DISABLED)) return;
+
+      //模拟loading
+      var n = 0, timer = setInterval(function(){
+        n = n + Math.random()*10|0;
+        if(n>100){
+          n = 100;
+          clearInterval(timer);
+          othis.removeClass(DISABLED);
+        }
+        element.progress('demo', n+'%');
+      }, 300+Math.random()*1000);
+
+      othis.addClass(DISABLED);
+    }
+  };
+
+  $('.site-demo-active').on('click', function(){
+    var othis = $(this), type = $(this).data('type');
+    active[type] ? active[type].call(this, othis) : '';
+  });
+});
+</script>
+
+</body>
+</html>

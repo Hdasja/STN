@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/layui.css">
+    <title>Page1</title>
+    <style>
+        /* 样式可以根据需要自定义 */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 30px 50px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* 用于示例页面的样式 */
+        .page-content {
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+
+        *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 10px;
+}
+
+.nav_link{
+    height: 100px;
+    list-style: none;
+}
+
+.nav_link {
+    display: flex; /* 使用 flex 布局 */
+    justify-content: flex-start; /* 水平等间距对齐 */
+    align-items: center; /* 垂直居中对齐 */
+}
+
+.nav_link li a{
+    transition: all 0.3s ease 0s;
+}
+
+.layui-input-block {
+    width: auto; /* 修改为自适应宽度 */
+}
+
+
+    .nav_link li button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        padding: 30px 30px;
+        font: inherit;
+        font-size: 25px;
+        color: #ddd; /* 使按钮颜色与文本颜色一致 */
+    }
+
+
+    .nav_link li button:hover {
+        color: black; /* 悬停时改变按钮颜色 */
+    }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul class="nav_link">
+        <li>
+            <a href="/ToPrice">
+                <button type="submit" style="border:none; background-color:transparent;">价格输入</button>
+            </a>>
+        </li>
+        <li>
+            <a href="/ToStatus">
+                <button type="submit" style="border:none; background-color:transparent;">状态节点</button>
+            </a>
+        </li>
+        <li>
+            <a href="/ToTask">
+                <button type="submit" style="border:none; background-color:transparent;">任务节点</button>
+            </a>>
+        </li>
+    </ul>
+</nav>
+
+<div class="layui-bg-gray" style="padding: 30px;">
+    <div class="layui-panel">
+        <div class="layui-font-24">
+            <div style="padding: 40px 25px;margin-inside: 20px;">步骤一：电价价格输入</div>
+        </div>
+    </div>
+
+    <div style="width: 80%;height: 60%;margin: 30px auto;">
+    <div class="layui-panel">
+    <br>
+    <form id="submit" class="layui-form" action="/pricesubmit0" style="margin-top: 30px; margin-bottom: 30px" method="POST">
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="white-space: nowrap; display: inline-block; width: 80px"><b>分时电价</b></label>
+            <div class="layui-input-block" style="width: 85%;">
+                <input type="text" id="submit" name="TOU_Values"
+                    {% for price in iptPriceData %}
+                    value="{{ price.TouValues }}"
+                    {% endfor %}
+                    required  lay-verify="required" placeholder="input array" autocomplete="off" class="layui-input" style="width: 100%;">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="white-space: nowrap; display: inline-block;"><b>电网售价</b></label>
+            <div class="layui-input-block" style="width: 85%;">
+                <input type="text" id="submit" name="price_Values"
+                    {% for price in iptPriceData %}
+                    value="{{ price.PriceValues }}"
+                    {% endfor %}
+                    required  lay-verify="required" placeholder="input array" autocomplete="off" class="layui-input" style="width: 100%;">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="white-space: nowrap; display: inline-block;"><b>光伏预测出力</b></label>
+            <div class="layui-input-block" style="width: 85%;">
+                <input type="text" id="submit" name="PV_Values"
+                    {% for price in iptPriceData %}
+                    value="{{ price.PvValues }}"
+                    {% endfor %}
+                    required  lay-verify="PV_values" placeholder="input array" autocomplete="off" class="layui-input" style="width: 100%;">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <div class="layui-inline">
+                {% if match == 0 %}
+                    <div id="layerDemo" style="margin-bottom: 0;">
+                        <button id="plotButton" type="button" data-method="offset" data-type="auto" class="layui-btn"><b>保存</b></button>
+                    </div>
+                {% else %}
+                    <button id="plotButton" type="submit" class="layui-btn" lay-submit lay-filter="formDemo"><b>保存</b></button>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </form>
+    </div>
+
+        <div style="width: 400px;height: 80px;margin: 40px auto;justify-content: center;align-content: center">
+        <div class="layui-btn-container" type="display: flex;flex-direction: row; justify-content: space-between">
+            <div class="layui-inline" style="margin-right: 10px;">
+            <form action="/backprice">
+                <button type="submit" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius"><b>返回</b></button>
+            </form>
+            </div>
+            <div class="layui-inline">
+            <form action="/ToStatus_1st" style="margin-right: 10px;">
+                <button type="submit" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius"><b>下一页</b></button>
+            </form>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+</div>
+
+<script src="/static/layui.js" charset="utf-8"></script>
+<script>
+
+
+    layui.use('form',function(){
+        var table = layui.table
+        table.init('demo',{
+            height:335
+            , limit:10
+        })
+    })
+
+        layui.use('layer', function(){ //独立版的layer无需执行这一句
+  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+
+  //触发事件
+  var active = {
+    setTop: function(){
+      var that = this;
+      //多窗口模式，层叠置顶
+      layer.open({
+        type: 1 //此处以iframe举例
+        ,area: ['390px', '260px']
+        ,shade: 0
+        ,yes: function(){
+          $(that).click();
+        }
+
+        ,zIndex: layer.zIndex //
+        ,success: function(layero, index){
+          layer.setTop(layero); //
+          layer.escIndex = layer.escIndex || [];
+          layer.escIndex.unshift(index);
+          layero.on('mousedown', function(){
+            var _index = layer.escIndex.indexOf(index);
+            if(_index !== -1){
+              layer.escIndex.splice(_index, 1);
+            }
+            layer.escIndex.unshift(index);
+          });
+        }
+        ,end: function(){
+          if(typeof layer.escIndex === 'object'){
+            layer.escIndex.splice(0, 1);
+          }
+        }
+      });
+    }
+    ,offset: function(othis){
+      var type = othis.data('type')
+
+      layer.open({
+        type: 1
+        ,offset: type
+        ,id: 'layerDemo'+type
+        ,content: '<div style="padding: 20px 100px;"><b>输入长度有误</b></div>'
+        ,btn: '修改'
+        ,btnAlign: 'c'
+        ,shade: 0
+        ,yes: function() {
+              window.location.href = '/backprice'
+          }
+      });
+    }
+  };
+  $('#layerDemo .layui-btn').on('click', function(){
+    var othis = $(this), method = othis.data('method');
+    active[method] ? active[method].call(this, othis) : '';
+  });
+  $(document).on('keyup', function(e){
+    if(e.keyCode === 27){
+      layer.close(layer.escIndex ? layer.escIndex[0] : 0);
+    }
+  });
+});
+
+
+
+</script>
+
+</body>
+</html>

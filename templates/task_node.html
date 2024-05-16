@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/layui.css">
+    <title>Page3</title>
+    <style>
+        /* 样式可以根据需要自定义 */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 30px 50px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* 用于示例页面的样式 */
+        .page-content {
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+
+        *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 10px;
+}
+
+.nav_link{
+    height: 100px;
+    list-style: none;
+}
+
+.nav_link {
+    display: flex; /* 使用 flex 布局 */
+    justify-content: flex-start; /* 水平等间距对齐 */
+    align-items: center; /* 垂直居中对齐 */
+}
+
+.nav_link li a{
+    transition: all 0.3s ease 0s;
+}
+
+.layui-input-block {
+    width: auto; /* 修改为自适应宽度 */
+}
+
+
+    .nav_link li button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        padding: 30px 30px;
+        font: inherit;
+        font-size: 25px;
+        color: #ddd; /* 使按钮颜色与文本颜色一致 */
+    }
+
+
+    .nav_link li button:hover {
+        color: black; /* 悬停时改变按钮颜色 */
+    }
+
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul class="nav_link">
+        <li>
+            <a href="/ToPrice">
+                <button type="submit" style="border:none; background-color:transparent;">价格输入</button>
+            </a>>
+        </li>
+        <li>
+            <a href="/ToStatus">
+                <button type="submit" style="border:none; background-color:transparent;">状态节点</button>
+            </a>
+        </li>
+        <li>
+            <a href="/ToTask">
+                <button type="submit" style="border:none; background-color:transparent;">任务节点</button>
+            </a>>
+        </li>
+    </ul>
+</nav>
+
+
+<div class="layui-bg-gray" style="padding: 30px;">
+    <div class="layui-panel">
+        <div class="layui-font-24">
+            <div style="padding: 40px 25px;margin-inside: 20px;">步骤三：任务节点输入</div>
+        </div>
+    </div>
+
+    <div class="layui-panel" style="width: 90%;height: 70%;margin: 20px auto;padding: 30px;overflow: auto">
+        <form class="layui-form" action="/TableData" style="margin-top: 30px; margin-bottom: 30px" method="POST">
+        <table class="layui-table" lay-size="lg" style="border-collapse: collapse; border: 2px solid black;">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col width="200">
+                <col width="200">
+                <col width="200">
+                <col width="200">
+            </colgroup>
+            <thead>
+                <tr style="border: 2px solid black;">
+                    <th >设备名称</th>
+                    <th>任务名称</th>
+                    <th>运行工况</th>
+                    <th>原料消耗率</th>
+                    <th>产品产率</th>
+                    <th>消耗电功率</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3">生料磨</td> <!-- 设置 rowspan 为 3 -->
+                    <td rowspan="3">生料磨制</td>
+                    <td>0</td>
+                    <td><input type="number"
+                           name="TableT10C" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                    <td><input type="number"
+                           name="TableT10G" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                    <td><input type="number"
+                           name="TableT10P" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><input type="number"
+                           name="TableT11C" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                    <td><input type="number"
+                           name="TableT11G" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                    <td><input type="number"
+                           name="TableT11P" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><input type="number"
+                           name="TableT12C" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                    <td><input type="number"
+                           name="TableT12G" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                    <td><input type="number"
+                           name="TableT12P" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                </tr>
+                <tr style="border: 2px solid black;">
+                    <td>回转窑</td>
+                    <td>煅烧</td>
+                    <td>0</td>
+                    <td><input type="number"
+                           name="TableT20C" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                    <td><input type="number"
+                           name="TableT20G" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                    <td><input type="number"
+                           name="TableT20P" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                </tr>
+                <tr>
+                    <td rowspan="3">水泥磨</td>
+                    <td rowspan="3">熟料磨制</td>
+                    <td>0</td>
+                    <td><input type="number"
+                           name="TableT30C" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                    <td><input type="number"
+                           name="TableT30G" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                    <td><input type="number"
+                           name="TableT30P" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><input type="number"
+                           name="TableT31C" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                    <td><input type="number"
+                           name="TableT31G" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                    <td><input type="number"
+                           name="TableT31P" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><input type="number"
+                           name="TableT32C" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                    <td><input type="number"
+                           name="TableT32G" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                    <td><input type="number"
+                           name="TableT32P" required  lay-verify="required" autocomplete="off" class="layui-input"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="width: 150px;height: 50px;margin: 30px auto;">
+            <div class="layui-btn-container">
+                    <button type="submit" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-normal"><b>提交</b></button>
+            </div>
+        </div>
+
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Change item</title>
+    <link rel="stylesheet" href="/static/css/layui.css">
+</head>
+<body>
+
+<div class="layui-panel">
+    <div class="layui-font-24">
+        <div style="padding: 40px 25px;margin-inside: 20px;">节点修改</div>
+    </div>
+</div>
+
+<div style="width: 500px;height: 800px;margin: 200px auto;">
+    <div class="layui-panel" >
+        <form class="layui-form" action="/changed/{{ status.StatusCode }}" method="POST">
+
+            <div class="layui-form-item" style="margin-top: 30px; margin-bottom: 30px">
+            <label class="layui-form-label" style="white-space: nowrap; display: inline-block;"><b>状态编号</b></label>
+                <div class="layui-input-block" style="width: 80%;">
+                    <input type="text"
+                           id="ipt_status_code"
+                           name="StatusCode"
+                           value="{{ status.StatusCode }}"
+                           required  lay-verify="required" autocomplete="off" class="layui-input" style="width: 85%;">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+            <label class="layui-form-label" style="white-space: nowrap; display: inline-block;"><b>状态名称</b></label>
+                <div class="layui-input-block" style="width: 80%;">
+                    <input type="text"
+                           id="ipt_status_name" required
+                           name="StatusName"
+                           value="{{ status.StatusName }}"
+                           lay-verify="required"
+                           autocomplete="off"
+                           class="layui-input"
+                           style="width: 85%;">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+            <label class="layui-form-label" style="white-space: nowrap; display: inline-block;"><b>初值</b></label>
+                <div class="layui-input-block" style="width: 80%;">
+                    <input type="number"
+                           id="ipt_initial_value"
+                           name="InitialValue"
+                           value="{{ status.InitialValue }}"
+                           required  lay-verify="required" placeholder="吨" autocomplete="off" class="layui-input" style="width: 85%;">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label"><b>储存上下限</b></label>
+                <div class="layui-input-inline" style="width: 138px;">
+                    <input type="number"
+                           id="ipt_storage_min"
+                           name="StorageMin"
+                           value="{{ status.StorageMin }}"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <label class="layui-form-mid"><b>吨</b></label>
+                <div class="layui-form-mid">-</div>
+                <div class="layui-input-inline" style="width: 138px;">
+                    <input type="number"
+                           id="ipt_storage_max"
+                           name="StorageMax"
+                           value="{{ status.StorageMax }}"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <label class="layui-form-mid"><b>吨</b></label>
+            </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" onclick="returnValues()"><b>保存</b></button>
+                    <a href="status_node.html">
+                    <form class="layui-form" action="/ToStatus"  method="GET">
+                    <button type="submit" class="layui-btn layui-btn-primary"><b>返回</b></button>
+                    </form>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
