@@ -1,0 +1,54 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+
+}
+
+.a{
+    font-size: Large;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 10px;
+}
+
+.nav_link{
+    list-style: none;
+}
+
+.nav_link li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav_link li a{
+    transition: all 0.3s ease 0s;
+}
+
+.layui-input-block {
+    width: auto; /* 修改为自适应宽度 */
+}
+
+    .nav_link li {
+        display: inline;
+        margin-right: 10px;
+    }
+
+    .nav_link li button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        padding: 0;
+        font: inherit;
+        color: inherit; /* 使按钮颜色与文本颜色一致 */
+        text-decoration: underline; /* 添加下划线效果 */
+    }
+
+    .nav_link li button:hover {
+        color: darkblue; /* 悬停时改变按钮颜色 */
+    }
